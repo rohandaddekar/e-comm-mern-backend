@@ -7,6 +7,7 @@ import update from "../controllers/category/update.js";
 import index from "../controllers/category/index.js";
 import store from "../controllers/category/store.js";
 import show from "../controllers/category/show.js";
+import upload from "../utils/fileUploadConfig.js";
 
 const categoryRoutes = Router();
 
@@ -15,8 +16,9 @@ categoryRoutes.get("/", verifyAccessToken, index); // get all
 categoryRoutes.post(
   "/",
   verifyAccessToken,
-  storeCategoryValidation,
+  // storeCategoryValidation,
   validationError,
+  upload.single("icon"),
   store
 ); // create
 

@@ -1,12 +1,20 @@
 import DbConnection from "./utils/DbConnection.js";
+import { v2 as cloudinary } from "cloudinary";
+import apiRoutes from "./routes/index.js";
 import cookieParser from "cookie-parser";
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import apiRoutes from "./routes/index.js";
 
 const app = express();
+
 dotenv.config();
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
