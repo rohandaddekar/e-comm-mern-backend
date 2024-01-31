@@ -2,6 +2,11 @@ import { Schema, model } from "mongoose";
 
 const addressSchema = new Schema(
   {
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     street: {
       type: String,
       required: true,
@@ -20,11 +25,6 @@ const addressSchema = new Schema(
     },
     pincode: {
       type: Number,
-      required: true,
-    },
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
       required: true,
     },
   },

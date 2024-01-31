@@ -34,17 +34,13 @@ const signUp = async (req, res) => {
       { expiresIn: "1h" }
     );
 
-    // Send a success response with set token in cookie
-    return res
-      .cookie("accessToken", token, {
-        httpOnly: true,
-        maxAge: 3600000, // 1 hr = 3600000 mili sec
-      })
-      .status(201)
-      .json({
-        success: true,
-        message: "user sign up successfully",
-      });
+    // Send a success response
+    return res.status(200).json({
+      success: true,
+      message: "user sign up successfully",
+      role: newUser.role,
+      token,
+    });
   } catch (error) {
     return res.status(500).json({
       success: false,

@@ -32,17 +32,13 @@ const signIn = async (req, res) => {
       { expiresIn: "1h" }
     );
 
-    // Send a success response and set token in cookie
-    return res
-      .cookie("accessToken", token, {
-        httpOnly: true,
-        maxAge: 3600000, // 1 hr = 3600000 mili sec
-      })
-      .status(200)
-      .json({
-        success: true,
-        message: "user sign in successfully",
-      });
+    // Send a success response
+    return res.status(200).json({
+      success: true,
+      message: "user sign in successfully",
+      role: userExist.role,
+      token,
+    });
   } catch (error) {
     return res.status(500).json({
       success: false,

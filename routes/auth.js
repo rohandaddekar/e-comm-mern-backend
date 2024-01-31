@@ -11,6 +11,6 @@ const authRoutes = Router();
 
 authRoutes.post("/sign-up", signUpValidation, validationError, signUp);
 authRoutes.post("/sign-in", signInValidation, validationError, signIn);
-authRoutes.post("/sign-out", verifyAccessToken, signOut);
+authRoutes.get("/sign-out", verifyAccessToken, signOut);
 
 export default authRoutes;

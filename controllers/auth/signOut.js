@@ -1,6 +1,6 @@
 const signOut = async (req, res) => {
   try {
-    return res.clearCookie("accessToken").status(200).json({
+    return res.status(200).json({
       success: true,
       message: "user sign out successfully",
     });

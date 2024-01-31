@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import Address from "./address.js";
 
 const userSchema = new Schema(
   {
@@ -37,12 +38,34 @@ const userSchema = new Schema(
       required: true,
       default: false,
     },
+    profileImg: {
+      type: String,
+      default:
+        "https://res.cloudinary.com/dgkkdtamu/image/upload/v1704888377/blog-laravel/mzwf9dxdoirqzv44sqke.png",
+    },
     verificationToken: {
       type: String,
     },
   },
   {
     timestamps: true,
+  }
+);
+
+userSchema.pre(
+  "deleteOne",
+  { document: true, query: false },
+  async function () {
+    const userId = this._id;
+
+    try {
+      await Address.deleteMany({ userId });
+    } catch (err) {
+      return res.status(500).json({
+        success: false,
+        message: "failed to delete user reference docs",
+      });
+    }
   }
 );
 

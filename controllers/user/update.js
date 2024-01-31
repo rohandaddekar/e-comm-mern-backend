@@ -12,10 +12,11 @@ const update = async (req, res) => {
       });
     }
 
-    const { firstName, lastName } = req.body;
+    const { firstName, lastName, role } = req.body;
 
     user.firstName = firstName;
     user.lastName = lastName;
+    user.role = role;
     await user.save();
 
     return res.status(200).json({
