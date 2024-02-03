@@ -1,20 +1,19 @@
-import fileUploadHandler from "../../utils/fileUploadHandler.js";
 import Category from "../../models/Category.js";
 
 const validateCategoryData = (data) => {
   const errors = [];
 
-  if (!data.name) {
-    errors.push({ path: "name", msg: "name is required" });
+  if (!data.icon) {
+    errors.push({ path: "icon", msg: "icon is required" });
   }
 
   return errors;
 };
 
-const store = async (req, res) => {
+const uploadIcon = async (req, res) => {
   try {
     const data = {
-      name: req.body.name,
+      icon: req.file,
     };
 
     const validationErrors = validateCategoryData(data);
@@ -30,7 +29,9 @@ const store = async (req, res) => {
       data.icon = cldRes.secure_url;
     }
 
-    const category = await Category.create(data);
+    const category = await Category.create({
+      name,
+    });
 
     return res.status(200).json({
       success: true,
@@ -46,4 +47,4 @@ const store = async (req, res) => {
   }
 };
 
-export default store;
+export default uploadIcon;

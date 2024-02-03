@@ -1,4 +1,15 @@
+import fileUploadHandler from "../../utils/fileUploadHandler.js";
 import Category from "../../models/Category.js";
+
+const validateCategoryData = (data) => {
+  const errors = [];
+
+  if (!data.name) {
+    errors.push({ path: "name", msg: "name is required" });
+  }
+
+  return errors;
+};
 
 const update = async (req, res) => {
   try {
@@ -12,12 +23,23 @@ const update = async (req, res) => {
       });
     }
 
-    const { name, icon } = req.body;
+    const data = {
+      name: req.body.name,
+    };
 
-    category.name = name;
+    const validationErrors = validateCategoryData(data);
+    if (validationErrors.length > 0) {
+      return res.status(400).json({
+        success: false,
+        errors: validationErrors,
+      });
+    }
 
-    if (icon) {
-      category.icon = icon;
+    category.name = req.body.name;
+
+    if (req.file) {
+      const cldRes = await fileUploadHandler(req.file);
+      category.icon = cldRes.secure_url;
     }
 
     await category.save();
