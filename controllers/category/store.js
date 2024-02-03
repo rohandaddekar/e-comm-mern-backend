@@ -1,14 +1,9 @@
+import customValidationError from "../../utils/customValidationError.js";
 import fileUploadHandler from "../../utils/fileUploadHandler.js";
 import Category from "../../models/Category.js";
 
 const validateCategoryData = (data) => {
-  const errors = [];
-
-  if (!data.name) {
-    errors.push({ path: "name", msg: "name is required" });
-  }
-
-  return errors;
+  return customValidationError(data, ["name"]);
 };
 
 const store = async (req, res) => {
