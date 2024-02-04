@@ -2,7 +2,20 @@ import Product from "../../models/Product.js";
 
 const index = async (req, res) => {
   try {
-    const products = await Product.find();
+    const { name, sortBy = "created_at", sortOrder = "asc" } = req.query;
+
+    const filters = {};
+
+    if (name) {
+      filters.name = { $regex: new RegExp(`${name}`, "i") };
+    }
+
+    const sortOptions = {};
+    sortOptions[sortBy] = sortOrder === "desc" ? -1 : 1;
+
+    const products = await Product.find(filters)
+      .sort(sortOptions)
+      .populate("categoryId", "name icon");
 
     return res.status(200).json({
       success: true,

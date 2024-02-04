@@ -11,15 +11,10 @@ const productSchema = new Schema(
       type: String,
       required: true,
     },
-    thumbnail: {
-      type: String,
-      default:
-        "https://res.cloudinary.com/dgkkdtamu/image/upload/v1704888243/blog-laravel/lyuxvzj9yl87zaedf4da.png",
-      required: true,
-    },
     images: [
       {
         type: String,
+        required: true,
       },
     ],
     price: {

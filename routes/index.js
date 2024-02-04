@@ -11,6 +11,6 @@ apiRoutes.use("/auth", authRoutes);
 apiRoutes.use("/user", userRoutes);
 apiRoutes.use("/address", addressRoutes);
 apiRoutes.use("/category", categoryRoutes);
-apiRoutes.use("/products", productRoutes);
+apiRoutes.use("/product", productRoutes);
 
 export default apiRoutes;

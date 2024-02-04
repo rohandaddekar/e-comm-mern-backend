@@ -2,7 +2,7 @@ import customValidationError from "../../utils/customValidationError.js";
 import fileUploadHandler from "../../utils/fileUploadHandler.js";
 import Category from "../../models/Category.js";
 
-const validateCategoryData = (data) => {
+const validateData = (data) => {
   return customValidationError(data, ["name"]);
 };
 
@@ -12,7 +12,7 @@ const store = async (req, res) => {
       name: req.body.name,
     };
 
-    const validationErrors = validateCategoryData(data);
+    const validationErrors = validateData(data);
     if (validationErrors.length > 0) {
       return res.status(400).json({
         success: false,
