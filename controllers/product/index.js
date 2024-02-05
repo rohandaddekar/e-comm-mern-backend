@@ -2,12 +2,21 @@ import Product from "../../models/Product.js";
 
 const index = async (req, res) => {
   try {
-    const { name, sortBy = "created_at", sortOrder = "asc" } = req.query;
+    const {
+      name,
+      categoryId,
+      sortBy = "created_at",
+      sortOrder = "asc",
+    } = req.query;
 
     const filters = {};
 
     if (name) {
       filters.name = { $regex: new RegExp(`${name}`, "i") };
+    }
+
+    if (categoryId) {
+      filters.categoryId = categoryId;
     }
 
     const sortOptions = {};
