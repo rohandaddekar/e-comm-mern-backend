@@ -15,7 +15,7 @@ productRoutes.post("/", verifyAccessToken, upload.array("images", 5), store); //
 
 productRoutes.get("/:id", verifyAccessToken, show); // get single
 
-productRoutes.put("/:id", verifyAccessToken, update); // update
+productRoutes.put("/:id", verifyAccessToken, upload.array("images", 5), update); // update
 
 productRoutes.delete("/:id", verifyAccessToken, destroy); // delete
 

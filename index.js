@@ -1,7 +1,6 @@
 import DbConnection from "./utils/DbConnection.js";
 import { v2 as cloudinary } from "cloudinary";
 import apiRoutes from "./routes/index.js";
-import cookieParser from "cookie-parser";
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -18,7 +17,6 @@ cloudinary.config({
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
 app.use(
   cors({
     origin: "http://localhost:5173",
