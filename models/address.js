@@ -7,6 +7,14 @@ const addressSchema = new Schema(
       ref: "User",
       required: true,
     },
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+    },
     street: {
       type: String,
       required: true,
@@ -26,6 +34,15 @@ const addressSchema = new Schema(
     pincode: {
       type: Number,
       required: true,
+    },
+    mobile: {
+      type: Number,
+      required: true,
+    },
+    isDefault: {
+      type: Boolean,
+      required: true,
+      default: false,
     },
   },
   { timestamps: true }

@@ -1,12 +1,13 @@
 import { Router } from "express";
-import verifyAccessToken from "../middlewares/verifyAccessToken.js";
+import show from "../controllers/address/show.js";
 import index from "../controllers/address/index.js";
 import store from "../controllers/address/store.js";
-import show from "../controllers/address/show.js";
 import update from "../controllers/address/update.js";
 import destroy from "../controllers/address/destroy.js";
 import validationError from "../utils/validationError.js";
+import verifyAccessToken from "../middlewares/verifyAccessToken.js";
 import storeAddressValidation from "../validations/address/store.js";
+import defaultAddress from "../controllers/address/defaultAddress.js";
 
 const addressRoutes = Router();
 
@@ -33,6 +34,9 @@ addressRoutes.put(
   validationError,
   update
 );
+
+// update default address
+addressRoutes.put("/:id/default", verifyAccessToken, defaultAddress);
 
 // delete address
 addressRoutes.delete("/:id", verifyAccessToken, destroy);

@@ -2,14 +2,28 @@ import Address from "../../models/address.js";
 
 const store = async (req, res) => {
   try {
-    const { street, city, state, country, pincode } = req.body;
-
-    const address = await Address.create({
+    const {
+      firstName,
+      lastName,
       street,
       city,
       state,
       country,
       pincode,
+      mobile,
+      isDefault,
+    } = req.body;
+
+    const address = await Address.create({
+      firstName,
+      lastName,
+      street,
+      city,
+      state,
+      country,
+      pincode,
+      mobile,
+      isDefault,
       userId: req.user.userId,
     });
 
