@@ -12,13 +12,25 @@ const update = async (req, res) => {
       });
     }
 
-    const { street, city, state, country, pincode } = req.body;
+    const {
+      firstName,
+      lastName,
+      street,
+      city,
+      state,
+      country,
+      pincode,
+      mobile,
+    } = req.body;
 
+    address.firstName = firstName;
+    address.lastName = lastName;
     address.street = street;
     address.city = city;
     address.state = state;
     address.country = country;
     address.pincode = pincode;
+    address.mobile = mobile;
     await address.save();
 
     return res.status(200).json({
