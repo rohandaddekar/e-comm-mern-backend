@@ -1,6 +1,7 @@
 import User from "../../models/user.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import Cart from "../../models/cart.js";
 
 const signUp = async (req, res) => {
   try {
@@ -27,6 +28,9 @@ const signUp = async (req, res) => {
       password: hashedPassword,
     });
 
+    // create cart for user
+    const cart = await Cart.create({ userId: newUser._id });
+
     // generate access token
     const token = jwt.sign(
       { userId: newUser._id, role: newUser.role },
@@ -39,6 +43,7 @@ const signUp = async (req, res) => {
       success: true,
       message: "user sign up successfully",
       role: newUser.role,
+      cartId: cart._id,
       token,
     });
   } catch (error) {

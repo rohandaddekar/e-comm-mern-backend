@@ -1,6 +1,7 @@
 import User from "../../models/user.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import Cart from "../../models/cart.js";
 
 const signIn = async (req, res) => {
   try {
@@ -25,6 +26,9 @@ const signIn = async (req, res) => {
       });
     }
 
+    // Find the user's cart
+    const cart = await Cart.findOne({ userId: userExist._id });
+
     // generate access token
     const token = jwt.sign(
       { userId: userExist._id, role: userExist.role },
@@ -37,6 +41,7 @@ const signIn = async (req, res) => {
       success: true,
       message: "user sign in successfully",
       role: userExist.role,
+      cartId: cart._id,
       token,
     });
   } catch (error) {
