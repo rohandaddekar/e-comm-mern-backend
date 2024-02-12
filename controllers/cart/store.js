@@ -16,8 +16,12 @@ const store = async (req, res) => {
     let cartItem = await CartItem.findOne({ productId, cartId });
 
     if (cartItem) {
-      cartItem.quantity = quantity;
-      await cartItem.save();
+      if (quantity === 0) {
+        await CartItem.deleteOne({ _id: cartItem._id });
+      } else {
+        cartItem.quantity = quantity;
+        await cartItem.save();
+      }
     } else {
       cartItem = await CartItem.create({ cartId, productId, quantity });
     }
