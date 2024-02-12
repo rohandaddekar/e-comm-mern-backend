@@ -9,7 +9,7 @@ import upload from "../utils/fileUploadConfig.js";
 
 const productRoutes = Router();
 
-productRoutes.get("/", verifyAccessToken, index); // get all
+productRoutes.get("/", index); // get all
 
 productRoutes.post("/", verifyAccessToken, upload.array("images", 5), store); // create
 
